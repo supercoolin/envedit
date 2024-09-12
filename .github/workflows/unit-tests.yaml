@@ -1,6 +1,8 @@
 name: Unit tests
 run-name: ${{ github.actor }} is running unit tests
 on: [push]
+  branches-ignore:
+    - '*dev*'
 jobs:
   Unit-Tests:
     runs-on: ubuntu-latest
