@@ -40,7 +40,26 @@ class EnvVarTest(unittest.TestCase):
     def test_init_bad(self):
         with self.assertRaises(ValueError):
             EnvVar("I want coffee")
-        
+
+    def test_set_value(self):
+        os.environ["ENVEDIT_TEST_PATH"] = "env:/edit:test"
+        inst = EnvVar("ENVEDIT_TEST_PATH")
+        self.assertIsNotNone(inst)
+        inst.set_path_list(["/dev/null", "/tmp"])
+        self.assertEqual(inst.value, ["/dev/null", "/tmp"])
+    
+    def test_get_export(self):
+        os.environ["ENVEDIT_TEST_PATH"] = "env:/edit:test"
+        inst = EnvVar("ENVEDIT_TEST_PATH")
+        self.assertIsNotNone(inst)
+        self.assertEqual(inst.get_export(), "export ENVEDIT_TEST_PATH=\"env:/edit:test\"")
+
+    def test_set_path_list(self):
+        os.environ["ENVEDIT_TEST_PATH"] = "env:/edit:test"
+        inst = EnvVar("ENVEDIT_TEST_PATH")
+        self.assertIsNotNone(inst)
+        inst.set_path_list(["/dev/null", "/tmp"])
+        self.assertEqual(inst.value, ["/dev/null", "/tmp"])
         
 if __name__ == '__main__':
     unittest.main()
