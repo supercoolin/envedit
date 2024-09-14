@@ -27,10 +27,10 @@ class EnvVar:
         self.value = parse_path_list(value)
 
     def get_export(self):
-        return f'export {self.name}="{self.value}"'
+        return f'export {self.name}="{path_list_to_str(self.value)}"'
     
     def set_path_list(self, path: path_list_t) -> None:
         """ Sets the value of this environment variable to a list of paths
         @param path: the new value for this environment variable
         """
-        self.value = path_list_to_str(path)
+        self.value = path
