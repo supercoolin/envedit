@@ -1,7 +1,11 @@
 name: Lint
 
-on: [push, pull_request]
-  branches-ignore: ['*dev*']
+on: 
+  push:
+    branches-ignore: ['*dev*']
+  pull:
+    branches-ignore: ['*dev*']
+
 
 jobs:
   lint:
