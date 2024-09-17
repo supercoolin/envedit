@@ -17,4 +17,3 @@ jobs:
           options: "-t py38 -t py39 -t py310 -t py311"
           src: "./envedit"
           jupyter: true
-          version: "21.5b1"
