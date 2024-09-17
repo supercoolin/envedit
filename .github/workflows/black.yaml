@@ -3,7 +3,7 @@ name: Lint
 on: 
   push:
     branches-ignore: ['*dev*']
-  pull:
+  pull_request:
     branches-ignore: ['*dev*']
 
 
