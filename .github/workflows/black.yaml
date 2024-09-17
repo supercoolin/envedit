@@ -13,3 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: psf/black@stable
+        with:
+          options: "-t py38 -t py39 -t py310 -t py311"
+          src: "./envedit"
+          jupyter: true
+          version: "21.5b1"
