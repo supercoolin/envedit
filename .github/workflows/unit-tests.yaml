@@ -1,6 +1,6 @@
 name: Unit tests
 run-name: ${{ github.actor }} is running unit tests
-on: 
+on:
   push:
     branches-ignore:
       - '*dev*'
