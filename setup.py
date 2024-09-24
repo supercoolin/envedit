@@ -8,7 +8,7 @@ setup(
     author_email="colin.evrard.134@gmail.com",
     url="https://github.com/supercoolin/envedit",  # If you have a repository
     packages=["envedit"],
-    scripts=["scripts/envedit.py"],
+    scripts=["scripts/editvars.py"],
     install_requires=[
         # List your dependencies here, e.g.,
         #'pandas>=2.2.0',
