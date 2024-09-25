@@ -6,6 +6,7 @@ from typing import List
 
 warn = "#WARNING:"
 ACTION_LIST_FILTER = "list_filter"
+ACTION_LIST_REPLACE = "list_replace"
 
 
 def parse_vars(variables) -> List[envedit.EnvVar]:
@@ -43,6 +44,11 @@ def list_filter(args):
     handle_output(var_list_export(envVars), args)
 
 
+def list_replace(args):
+    envVars = parse_vars(args.variables)
+    handle_output(var_list_export(envVars), args)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog=__file__)
     parser.add_argument(
@@ -65,6 +71,20 @@ if __name__ == "__main__":
 
     list_filter_parser.add_argument(
         "pattern", help="The pattern to filter out. Supports Unix style globs."
+    )
+
+    list_replace_parser = action_parsers.add_parser(
+        ACTION_LIST_REPLACE,
+        help="Replace the elements from the colon separated lists.",
+    )
+    list_replace_parser.set_defaults(func=list_replace)
+    list_replace_parser.add_argument("pattern", help="The pattern to replace.")
+    list_replace_parser.add_argument("value", help="The value to replace with.")
+    list_replace_parser.add_argument(
+        "-m",
+        "--max",
+        action="store",
+        help="Maximum number of times to replace the pattern",
     )
 
     args = parser.parse_args()
