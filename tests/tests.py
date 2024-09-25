@@ -7,10 +7,11 @@ from envedit.common import path_list_to_str
 from envedit.env_var import EnvVar
 
 import os
+
 cwd = os.path.dirname(os.path.realpath(__file__))
 
-class ParseTest(unittest.TestCase):
 
+class ParseTest(unittest.TestCase):
     def test_var_list(self):
         self.assertEqual(parse_var_list("test"), ["test"])
         in1 = "PATH,LD_LIBRARY_PATH"
@@ -21,16 +22,16 @@ class ParseTest(unittest.TestCase):
         in1 = "/dev/null:/tmp"
         self.assertEqual(parse_path_list(in1), ["/dev/null", "/tmp"])
 
-class CommonTest(unittest.TestCase):
 
+class CommonTest(unittest.TestCase):
     def test_path_list_to_str(self):
 
         self.assertEqual(path_list_to_str(["/dev/null", "/tmp"]), "/dev/null:/tmp")
         self.assertEqual(path_list_to_str(["root"]), "root")
         self.assertEqual(path_list_to_str([]), "")
-    
-class EnvVarTest(unittest.TestCase):
 
+
+class EnvVarTest(unittest.TestCase):
     def test_init(self):
         os.environ["ENVEDIT_TEST_PATH"] = "env:/edit:test"
         inst = EnvVar("ENVEDIT_TEST_PATH")
@@ -47,12 +48,12 @@ class EnvVarTest(unittest.TestCase):
         self.assertIsNotNone(inst)
         inst.set_path_list(["/dev/null", "/tmp"])
         self.assertEqual(inst.value, ["/dev/null", "/tmp"])
-    
+
     def test_get_export(self):
         os.environ["ENVEDIT_TEST_PATH"] = "env:/edit:test"
         inst = EnvVar("ENVEDIT_TEST_PATH")
         self.assertIsNotNone(inst)
-        self.assertEqual(inst.get_export(), "export ENVEDIT_TEST_PATH=\"env:/edit:test\"")
+        self.assertEqual(inst.get_export(), 'export ENVEDIT_TEST_PATH="env:/edit:test"')
 
     def test_set_path_list(self):
         os.environ["ENVEDIT_TEST_PATH"] = "env:/edit:test"
@@ -60,6 +61,14 @@ class EnvVarTest(unittest.TestCase):
         self.assertIsNotNone(inst)
         inst.set_path_list(["/dev/null", "/tmp"])
         self.assertEqual(inst.value, ["/dev/null", "/tmp"])
-        
-if __name__ == '__main__':
+
+    def test_remove(self):
+        os.environ["ENVEDIT_TEST_PATH"] = "env:/edit:test"
+        inst = EnvVar("ENVEDIT_TEST_PATH")
+        self.assertIsNotNone(inst)
+        inst.remove_val(0)
+        self.assertEqual(inst.value, ["/edit", "test"])
+
+
+if __name__ == "__main__":
     unittest.main()

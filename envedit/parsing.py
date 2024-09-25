@@ -12,14 +12,14 @@ def parse_var_list(vars_in: str) -> var_list_t:
         return [vars_in]
     else:
         return vars_in.split(",")
-    
+
 
 def parse_path_list(vars_in: str) -> path_list_t:
     """
     Parses a path list in a classic colon separated list
     <path> | <path>:<path>:<...>
     @param vars_in(str): the string to parse into a path list
-    @return (path_list_t): 
+    @return (path_list_t):
     """
     if ":" not in vars_in:
         return [vars_in]
