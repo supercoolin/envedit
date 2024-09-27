@@ -46,6 +46,14 @@ def list_filter(args):
 
 def list_replace(args):
     envVars = parse_vars(args.variables)
+    n_replace = args.max
+    for v in envVars:
+        while idx := v.match_pattern(args.pattern):
+            if n_replace and n_replace <= 0:
+                break
+            v.replace_val(idx, args.value)
+            if n_replace:
+                n_replace -= 1
     handle_output(var_list_export(envVars), args)
 
 
@@ -84,7 +92,8 @@ if __name__ == "__main__":
         "-m",
         "--max",
         action="store",
-        help="Maximum number of times to replace the pattern",
+        help="Maximum number of times to replace the pattern. If absent, replaces every instance.",
+        type=int,
     )
 
     args = parser.parse_args()

@@ -55,3 +55,11 @@ class EnvVar:
         @param index: the index of the value to remove
         """
         self.value = self.value[:index] + self.value[index + 1 :]
+
+    def replace_val(self, index: int, val: str):
+        """
+        Replaces a value from the list at the given index
+        @param index: the index of the value to replace
+        @param val: the new value to insert
+        """
+        self.value[index] = val
