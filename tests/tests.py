@@ -69,6 +69,14 @@ class EnvVarTest(unittest.TestCase):
         inst.remove_val(0)
         self.assertEqual(inst.value, ["/edit", "test"])
 
+    def test_match_env_var(self):
+        os.environ["ENVEDIT_TEST_PATH"] = "env:/edit:test"
+        inst = EnvVar("ENVEDIT_TEST_PATH")
+        self.assertIsNotNone(inst)
+        self.assertEqual(inst.match_pattern("env"), 0)
+        self.assertEqual(inst.match_pattern("*edit"), 1)
+        self.assertIsNone(inst.match_pattern("coffee"))
+
 
 if __name__ == "__main__":
     unittest.main()
