@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="envedit",
-    version="1.0.0",
+    version="1.1.0",
     description="A custom Python project to edit environment variables.",
     author="Colin Evrard",
     author_email="colin.evrard.134@gmail.com",

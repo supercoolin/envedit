@@ -4,7 +4,7 @@ A tool to bulk manipulate environment variables
 # TODO:
 ## envedit
 - [x] Add support for filtering environment variables
-- [ ] Add support for replacing environment variables
+- [x] Add support for replacing environment variables
 ## stackenv
 - [ ] Add support for pushing: i.e create a version of an environment variable to which we can "pop" back.
 - [ ] Add support for popping.
